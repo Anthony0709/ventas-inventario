@@ -1,0 +1,46 @@
+<nav class="p-3 border-end" style="width: 250px;">
+  <div class="text-center mb-4">
+    <h6 class="fw-bold mb-0">{{ username }}</h6>
+    <small class="text-muted">
+      {{ role === 'admin' ? 'Administrador' : role === 'seller' ? 'Vendedor' : 'Invitado' }}
+    </small>
+  </div>
+
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/dashboard" routerLinkActive="active">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/products" routerLinkActive="active">
+        <i class="bi bi-box-seam me-2"></i> Productos
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/stores" routerLinkActive="active">
+        <i class="bi bi-shop me-2"></i> Tiendas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/sales" routerLinkActive="active">
+        <i class="bi bi-cart-check me-2"></i> Ventas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/entradas" routerLinkActive="active">
+        <i class="bi bi-box-arrow-in-down me-2"></i> Entradas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/reportes" routerLinkActive="active">
+        <i class="bi bi-graph-up me-2"></i> Reportes
+      </a>
+    </li>
+    <li class="nav-item mt-3 border-top pt-2">
+      <a class="nav-link text-white" routerLink="/configuracion" routerLinkActive="active">
+        <i class="bi bi-gear me-2"></i> Configuración
+      </a>
+    </li>
+  </ul>
+</nav>

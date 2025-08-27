@@ -1,0 +1,79 @@
+<div class="container-fluid py-3">
+  <!-- Tarjetas -->
+  <div class="row g-3">
+    <div class="col-6 col-md-3" *ngFor="let card of [
+      {label:'PEN EN CAJA', value: summary.penCaja || 0, icon:'bi-cash-stack', color:'bg-primary'},
+      {label:'COMPRAS DEL MES', value: summary.comprasDia || 0, icon:'bi-bag-fill', color:'bg-danger'},
+      {label:'VENTAS DEL DÍA', value: summary.ventasDia || 0, icon:'bi-currency-dollar', color:'bg-success'},
+      {label:'INVERTIDO EN STOCK', value: summary.inventarioValor || 0, icon:'bi-tag-fill', color:'bg-purple'},
+      {label:'PROVEEDORES', value: summary.proveedores || 0, icon:'bi-truck', color:'bg-info'},
+      {label:'MARCAS', value: summary.marcas || 0, icon:'bi-collection-fill', color:'bg-success'},
+      {label:'CLIENTES', value: summary.clientes || 0, icon:'bi-people-fill', color:'bg-pink'},
+      {label:'PRODUCTOS REGISTRADOS', value: summary.productosRegistrados || 0, icon:'bi-box-seam', color:'bg-warning'}
+    ]">
+      <div class="card text-white" [ngClass]="card.color">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div>{{card.label}}</div>
+              <h4 class="fw-bold mb-0">{{card.value | number:'1.2-2'}}</h4>
+            </div>
+            <i class="bi" [ngClass]="card.icon" style="font-size:2rem;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Productos y Tiendas -->
+  <div class="row g-3 mt-3">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">Productos recientes</div>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead><tr><th>ID</th><th>Nombre</th><th>Stock</th><th>Precio</th></tr></thead>
+            <tbody>
+              <tr *ngFor="let p of products">
+                <td>{{p.id}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.stock}}</td>
+                <td>{{p.price | currency:'S/ '}}</td>
+              </tr>
+              <tr *ngIf="!products.length">
+                <td colspan="4" class="text-center text-muted">Sin productos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">Tiendas</div>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let s of stores" class="list-group-item d-flex justify-content-between">
+            <span>{{s.name}}</span>
+            <span class="badge bg-secondary">{{s.location}}</span>
+          </li>
+          <li *ngIf="!stores.length" class="list-group-item text-muted text-center">Sin tiendas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico -->
+  <div class="card mt-3">
+    <div class="card-header d-flex justify-content-between">
+      <span>Comparativa Ventas y Compras del año {{year}}</span>
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" (click)="refreshYear(-1)">« {{year-1}}</button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="refreshYear(1)">{{year+1}} »</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <canvas id="salesChart" height="100"></canvas>
+    </div>
+  </div>
+</div>
